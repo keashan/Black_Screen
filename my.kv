@@ -1,8 +1,34 @@
 <MyGrid>
+    slider:slider
+    qc:qc
+    sw:sw
     GridLayout:
         cols:1
+        size:root.width-100,root.height-100
+        pos:50,50
         
-        GridLayout:
         Label:
             text:'Set Color'
+        Slider:
+            id: slider
+            min: 0
+            max: 100
+            step: 1
+            orientation: 'horizontal'
+
+        Label:
+            text: str(int(slider.value))
+            size:root.width,root.height*.25
+            background_color: slider.value, slider.value, slider.value, 1
+        
+        GridLayout:
+            cols:2
+            Button:
+                id:qc
+                text:'Quick Change'
+                on_press:root.quickchange()
+            Button:
+                id:sw
+                text:'Set wallpaper'
+        
                     
