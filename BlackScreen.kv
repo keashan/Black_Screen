@@ -1,0 +1,52 @@
+#:kivy 0.5.5
+<MyGrid>
+    slider:slider
+    qc:qc
+    sw:sw
+    GridLayout:
+        cols:1
+        size:root.width-100,root.height-100
+        pos:50,50
+        spacing: '20dp'
+        background_color:
+
+        Label:
+            text:'Set Color'
+            color:0,0,0,1
+            font_size:20
+        Slider:
+            id: slider
+            min: 0
+            max: 150
+            step: 1
+            orientation: 'horizontal'
+            
+        Label:
+            #outline_color: 5, 5, 5, 1
+            size:root.width,root.height*.25
+            background_color: slider.value/255, slider.value/255, slider.value/255, 1
+
+            canvas.before:
+                Color:
+                    rgba:slider.value/255, slider.value/255, slider.value/255, 1#self.background_color
+                Rectangle:
+                    size:self.size
+                    pos:self.pos
+                    
+        
+        GridLayout:
+            cols:2
+            spacing: '20dp'
+            Button:
+                id:qc
+                text:'Quick Change'
+                on_press:root.quickchange()
+                background_normal: ''
+                background_color: 55/255, 215/255, 255/255, 1
+            Button:
+                id:sw
+                text:'Set wallpaper'
+                background_normal: ''
+                background_color: 55/255, 215/255, 255/255, 1
+        
+                    
