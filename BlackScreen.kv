@@ -1,5 +1,10 @@
 #:kivy 0.5.5
-<MyGrid>
+WindowManager:
+    FirstPage:
+    BackPage:
+    
+<FirstPage>:
+    name:"FirstPage"
     slider:slider
     qc:qc
     sw:sw
@@ -17,9 +22,11 @@
         Slider:
             id: slider
             min: 0
-            max: 150
+            max: 100
             step: 1
             orientation: 'horizontal'
+            width:root.width-100
+            
             
         Label:
             #outline_color: 5, 5, 5, 1
@@ -49,4 +56,13 @@
                 background_normal: ''
                 background_color: 55/255, 215/255, 255/255, 1
         
-                    
+<BackPage>:
+    name:"Back"
+    GridLayout:
+        cols:1
+        size:root.width-100,root.height-100
+        pos:50,50
+        spacing: '20dp'
+        background_color:
+
+        
