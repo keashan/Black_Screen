@@ -23,14 +23,21 @@ class FirstPage(Screen):
     #sw=ObjectProperty(None)
     
     def quickchange(self):
-        notification.notify(title='Button Clicked',message='Slider Value:' + str(self.slider.value/255),app_icon=None,timeout=100)
-        print('Slider Value:',str(self.slider.value))
+        #notification.notify(title='Button Clicked',message='Slider Value:' + str(self.slider.value/255),app_icon=None,timeout=100)
+        #print('Slider Value:',str(self.slider.value))
+        #=self.slider.value
+        #blackscreen_app.screen_manager.ids.BackPage.ids.cl.text=slider_value
+        
         blackscreen_app.screen_manager.current='BackPage'
-        #blackscreen_app.screen_manager.transition.direction="left"
+        blackscreen_app.screen_manager.transition.direction="right"
+        
 
 
 class BackPage(Screen):
-    pass
+    def on_enter(self,*args):
+        slider_value=self.manager.ids.FirstPage.slider.value
+        print(slider_value)
+        self.cl.text= slider_value
 
 class WindowManager(ScreenManager):
     pass
@@ -51,8 +58,8 @@ class BlackScreenApp(App):
         screen.add_widget(self.back_page)
         self.screen_manager.add_widget(screen)
 
-        blackscreen_app.screen_manager.current='FirstPage'
-        return kv
+        #.screen_manager.current='BackPage'
+        return self.screen_manager
 
     
 if __name__=='__main__':

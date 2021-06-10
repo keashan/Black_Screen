@@ -1,8 +1,36 @@
 #:kivy 0.5.5
-WindowManager:
-    FirstPage:
-    BackPage:
-    
+<ScreenManagement>:
+    transition: FallOutTransition()
+    Screen1:
+        id: FirstPage
+        name: 'FirstPage'
+    Screen2:
+        id: BackPage
+        name: 'BackPage'
+
+<BackPage>:
+    name:"BackPage"
+    GridLayout:
+        cols:1
+        size:root.width-100,root.height-100
+        #pos:50,50
+        spacing: '20dp'
+        background_color:
+
+        Label:
+            id:cl
+            size:root.width,root.height
+            #background_color: root.manager.get_screen("FirstPage").slider.value/255, root.manager.get_screen("FirstPage").slider.value/255, root.manager.get_screen("FirstPage").slider.value/255, 1
+
+            canvas.before:
+                Color:
+                    #rgba:0, 0, 0, 1
+                    #rgba:root.manager.screens[0].ids.slider.value/255, root.manager.screens[0].ids.slider.value/255, root.manager.screens[0].ids.slider.value/255, 1#self.background_color
+                Rectangle:
+                    size:self.size
+                    pos:self.pos
+
+
 <FirstPage>:
     name:"FirstPage"
     slider:slider
@@ -11,8 +39,9 @@ WindowManager:
     GridLayout:
         cols:1
         size:root.width-100,root.height-100
-        pos:50,50
+        #pos:50,50
         spacing: '20dp'
+        padding: 20, 10
         background_color:
 
         Label:
@@ -22,15 +51,15 @@ WindowManager:
         Slider:
             id: slider
             min: 0
-            max: 100
+            max: 150
             step: 1
             orientation: 'horizontal'
-            width:root.width-100
+            size_hint_x: 0.8
             
             
         Label:
             #outline_color: 5, 5, 5, 1
-            size:root.width,root.height*.25
+            size:root.width-100,root.height*.25
             background_color: slider.value/255, slider.value/255, slider.value/255, 1
 
             canvas.before:
@@ -44,6 +73,7 @@ WindowManager:
         GridLayout:
             cols:2
             spacing: '20dp'
+            width:root.width-100
             Button:
                 id:qc
                 text:'Quick Change'
@@ -55,14 +85,4 @@ WindowManager:
                 text:'Set wallpaper'
                 background_normal: ''
                 background_color: 55/255, 215/255, 255/255, 1
-        
-<BackPage>:
-    name:"Back"
-    GridLayout:
-        cols:1
-        size:root.width-100,root.height-100
-        pos:50,50
-        spacing: '20dp'
-        background_color:
-
         
