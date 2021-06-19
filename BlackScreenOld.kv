@@ -1,30 +1,47 @@
 #:kivy 0.5.5
-<ScreenManagement>:
+<WindowManager>:
     transition: FallOutTransition()
     Screen1:
-        id: FirstPage
-        name: 'FirstPage'
+        id: Dummy
+        name:'DummyScreen'
     Screen2:
-        id: BackPage
+        id: First
+        name: 'FirstPage'
+    Screen3:
+        id: Back
         name: 'BackPage'
 
+<DummyScreen>:
+    GridLayout:
+        cols:1
+        size:root.width,root.height
+        Label:
+            id:dm
+            name:"DM"
+            size:root.width,root.height
+            canvas.before:
+                Color:
+                    rgba:55/255, 215/255, 255/255, 1
+                Rectangle:
+                    size:self.size
+                    pos:self.pos
+
 <BackPage>:
-    name:"BackPage"
     GridLayout:
         cols:1
         size:root.width-100,root.height-100
         #pos:50,50
-        spacing: '20dp'
         background_color:
 
         Label:
             id:cl
+            name:"CL"
             size:root.width,root.height
             #background_color: root.manager.get_screen("FirstPage").slider.value/255, root.manager.get_screen("FirstPage").slider.value/255, root.manager.get_screen("FirstPage").slider.value/255, 1
-
+            text:"Test"
             canvas.before:
                 Color:
-                    #rgba:0, 0, 0, 1
+                    rgba:55/255, 215/255, 255/255, 1
                     #rgba:root.manager.screens[0].ids.slider.value/255, root.manager.screens[0].ids.slider.value/255, root.manager.screens[0].ids.slider.value/255, 1#self.background_color
                 Rectangle:
                     size:self.size
@@ -32,7 +49,6 @@
 
 
 <FirstPage>:
-    name:"FirstPage"
     slider:slider
     qc:qc
     sw:sw
@@ -42,7 +58,6 @@
         #pos:50,50
         spacing: '20dp'
         padding: 20, 10
-        background_color:
 
         Label:
             text:'Set Color'
@@ -54,8 +69,8 @@
             max: 150
             step: 1
             orientation: 'horizontal'
-            size_hint_x: 0.8
-            
+            #on_value:
+                #root.manager.get_screen('BackPage').cl.text=str(self.value)
             
         Label:
             #outline_color: 5, 5, 5, 1
