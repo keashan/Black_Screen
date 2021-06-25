@@ -1,65 +1,89 @@
 #:kivy 0.5.5
-<ColorSelectScreen>:
-    label:lbcolor
-    name: 'colorselect'
-    BoxLayout:
-        orientation: 'vertical'
-        padding:'20dp'
-        spacing:'10dp'
-        Label:
-            text:'Set Color'
-            color:0,0,0,1
-            border:
-
-        Slider:
-            id: slider
-            min: 1
-            max: 150
-            step: 1
-            value: 1
-            on_value: 
-                root.manager.get_screen('colorselect').label.background_color=slider.value/255, slider.value/255, slider.value/255, 1
-                root.manager.get_screen('black').label.text=str(slider.value)
-        Label:
-            #outline_color: 5, 5, 5, 1
-            id: lbcolor
-            size:root.width*0.75,root.height*.25
-            canvas.before:
-                Color:
-                    rgba:slider.value/255, slider.value/255, slider.value/255, 1#self.background_color
-                Rectangle:
-                    size:self.size
-                    pos:self.pos
-
-        BoxLayout:
-            Button:
-                text: 'Quick Change'
-                on_press: 
-                    root.manager.transition.direction = 'left'
-                    root.manager.current = 'black'
-            Button:
-                text: 'Set Wallpaper'
-                on_press: 
-                    root.manager.transition.direction = 'left'
-                    root.manager.current = 'black'
-
-<ColorScreen>:
-    label: lbl
-    name: 'black'
+<BlackScreenGUI>:
+    sm: screenmanager
     orientation: 'vertical'
-    BoxLayout:
-        Button:
-            text: 'Go back'
-            on_press: 
-                root.manager.transition.direction = 'right'
-                root.manager.current = 'colorselect'
+    ScreenManager:
+        id: screenmanager
+        rgba:0,0,0,1
+        Screen:
+            name:'splash'
+            on_enter: root.splash_screen()
+            BoxLayout:
+                orientation:'vertical'
+                BoxLayout:
+                    Image:
+                        source:'Images/logo.png'
+                        allow_stretch:False
+                BoxLayout:
+                    size_hint: 1, .5
+                    Label:
+                        text:'V5.0'
+                        color: 0/255, 74/255, 153/255, 1
+                
+                
+        Screen:
+            name:'colorselect'
+            label:lbcolor
+            BoxLayout:
+                orientation: 'vertical'
+                padding:'20dp'
+                spacing:'10dp'
+                Label:
+                    text:''
+                Label:
+                    text:'Set Color'
+                    color: 0/255, 74/255, 153/255, 1
+                    size_hint: 1, .5
 
-        Label:
-            id: lbl
-            text: '1'
-            canvas.before:
-                Color:
-                    rgba:int(lbl.text)/255,0,0,1#self.background_color
-                Rectangle:
-                    size:self.size
-                    pos:self.pos
+
+                Slider:
+                    id: slider
+                    min: 1
+                    max: 150
+                    step: 1
+                    value: 1
+                    height:root.height*.1
+                    on_value: 
+                        screenmanager.get_screen('black').rgba=slider.value/255, slider.value/255, slider.value/255, 1
+                        screenmanager.rgba=slider.value/255, slider.value/255, slider.value/255, 1
+                Label:
+                    #outline_color: 5, 5, 5, 1
+                    id: lbcolor
+                    #size:root.width*0.5,root.height*.25
+                    canvas.before:
+                        Color:
+                            rgba:slider.value/255, slider.value/255, slider.value/255, 1#self.background_color
+                        Rectangle:
+                            size:self.size
+                            pos:self.pos
+
+                BoxLayout:
+                    Button:
+                        text: 'Quick Change'
+                        on_press: root.btn_quick()
+                        background_color: 5/255, 205/255, 250/255, 1
+                        size_hint: 1,.5
+                    Button:
+                        id:bone
+                        text: 'Set Wallpaper'
+                        on_press: root.btn_wallpaper()
+                        background_color: 5/255, 205/255, 250/255, 1
+                        size_hint: 1, .5
+                BoxLayout:
+                    Label:
+                        text:''
+        Screen:
+            name:'black'
+            label: lbl
+            orientation: 'vertical'
+            BoxLayout:   
+                Label:
+                    id: lbl
+                    text: ''
+                    #color:
+                    canvas.before:
+                        Color:
+                            rgba:screenmanager.rgba
+                        Rectangle:
+                            size:self.size
+                            pos:self.pos
