@@ -1,0 +1,6 @@
+/.vscode/
+/.buildozer/
+/buildozer.spec
+/get-pip.py
+/android.txt
+/bin/
